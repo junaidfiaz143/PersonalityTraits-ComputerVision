@@ -1,0 +1,43 @@
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+| USE WEBCAM IN THE LIGHTED AREA TO GET CLEAR VIEW |
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+
++-=-=-=-=-=-=-=-=+
+| LANGUAGE/TOOLS |
++-=-=-=-=-=-=-=-=+
+ >- python: 3.7.3
+ >- sublime-text
+
++-=-=-=-=-=-+
+| LIBRARIES |
++-=-=-=-=-=-+
+ >- numpy
+ >- opencv-python
+ >- pillow
+ >- dlib
+
++-=-=-=-+
+| ABOUT |
++-=-=-=-+
+ >- There are two python files included in the folder. One is to run facial feature detector using webcam if available
+and other is to run facial feature detector on an single image. In this project we use HOG (Histograms of Oriented Gradients) 
+based face detector and then we use dlib library to extract the facial features on 68 points like eyes, nose and mouth etc.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DOUBLE CLICK ON "APP-IMAGE.BAT" TO RUN ON AN IMAGE AVAILABLE IN IMAGES FOLDER
+&
+DOUBLE CLICK ON "APP-VIDEO.BAT" TO RUN ON WEBCAM IF AVAILABLE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-=-=-=-=-=-=-=-=-+
+| FLOW OF PROGRAM |
++-=-=-=-=-=-=-=-=-+
+ >- 1. get a frame from video or get an image
+ >- 2. detect faces in the input
+ >- 3. get 68 points facial landmarks using dlib
+ >- 4. get points of those specific points on which we consider perconality classification
+ >- 5. do some post-processing on the output image like draw lines on faccial parts using convexHull and contour
+ +-->  ("convexHull" gives the boundry around the part and "contour" draws a line)
+ >- 6. now we get euclidean-distance between upper eye-lid and lower eye-lid to know that the eye is open or close
+ >- 7. same goes for lips and nose
+ >- 8. choose threshold to classify the personality
+-----------------------------

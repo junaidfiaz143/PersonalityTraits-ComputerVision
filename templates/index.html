@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>Video</title>
+
+		<style type="text/css">
+			#tags{
+				display: none;
+			}			
+		</style>
+
+	</head>
+
+<body>
+	<center><h1>Personality Traits</h1></center>
+
+	<center><img id="imgPreview" style="background-color: #dedede;" src="../static/images/no_preview.png" width="600" height="400"></center>
+
+	<center><button id="btnPlayBack" onclick='startDetection()'>Start</button></center>
+
+	<p id="tags"></p>
+
+	<script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+
+	<script type="text/javascript">
+		var tags = document.getElementById("tags");
+
+		function startDetection(){
+			var imgSrc = document.getElementById("imgPreview").getAttribute("src");
+
+			if (imgSrc == "../static/images/no_preview.png"){
+				document.getElementById("imgPreview").setAttribute("src", "{{ url_for('video_feed') }}");	
+				document.getElementById("btnPlayBack").innerHTML = "Stop";	
+
+				tags.style.display = "block";
+				console.log("Video started!");		
+			}else{
+				document.getElementById("imgPreview").setAttribute("src", "../static/images/no_preview.png");
+				document.getElementById("btnPlayBack").innerHTML = "Start";	
+
+				tags.style.display = "none";
+				console.log("Video stopped!");
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		var imgSrc = document.getElementById("imgPreview").getAttribute("src");
+		function update() {
+			$.getJSON("/update", function(response){
+				// console.log(response["props"]);
+
+				if (response["props"].length == 0){
+					response["props"][0] = "not found";
+					response["props"][1] = "not found";
+					response["props"][2] = "not found";
+				}
+
+				$("#tags").html(
+					response["props"][0] 
+					+ "<br>" + 
+					response["props"][1] 
+					+ "<br>" + 
+					response["props"][2]
+				);
+			});
+		}
+		setInterval(update, 500);
+		update();
+	</script>
+
+</body>
+
+</html>
